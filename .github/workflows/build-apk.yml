@@ -1,9 +1,7 @@
 name: Build APK
 
 on:
-  push:
-    branches:
-      - main  # Değiştirmeniz gereken ana dal adını buraya ekleyin
+  workflow_dispatch:  # Manuel başlatma için bu etkinliği kullanın
 
 jobs:
   build:
@@ -21,7 +19,8 @@ jobs:
 
     - name: Build APK
       run: |
-        ./gradlew assembleRelease  # Gradle komutunuzu burada belirtin
+        chmod +x ./gradlew
+        ./gradlew assembleRelease
 
     - name: Upload APK
       uses: actions/upload-artifact@v2
