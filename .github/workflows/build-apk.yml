@@ -1,0 +1,30 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - main  # Değiştirmeniz gereken ana dal adını buraya ekleyin
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+
+    - name: Build APK
+      run: |
+        ./gradlew assembleRelease  # Gradle komutunuzu burada belirtin
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-release
+        path: app/build/outputs/apk/release/app-release-unsigned.apk  # APK dosya yolunuza göre güncelleyin
