@@ -10,6 +10,6 @@ include_directories(include)
 include_directories(prefab/modules/dobby/include)
 
 add_library(native-lib SHARED
-        SHARED hook.cpp il2cpp_dump.cpp)
+        hook.cpp il2cpp_dump.cpp)
 
-target_link_libraries(native-lib log dobby::dobby )
+target_link_libraries(native-lib log dobby::dobby)
