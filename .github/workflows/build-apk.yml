@@ -1,7 +1,9 @@
-name: Build APK
+name: Build and Release APK
 
 on:
-  workflow_dispatch:  # Manuel başlatma için bu etkinliği kullanın
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -20,10 +22,10 @@ jobs:
     - name: Build APK
       run: |
         chmod +x ./gradlew
-        ./gradlew assembleRelease
+        ./gradlew assembleRelease  # APK oluşturmak için "assembleRelease" komutunu kullanıyoruz
 
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
         name: app-release
-        path: app/build/outputs/apk/release/app-release-unsigned.apk  # APK dosya yolunuza göre güncelleyin
+        path: app/build/outputs/apk/release/app-release.apk  # APK dosya yolunuza göre güncelleyin
